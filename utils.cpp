@@ -3,6 +3,9 @@
 std::string writeTask(int id, std::string desc, std::string status)
 {
 	std::string Task;
+	std::time_t now = std::time(NULL);
+	std::string createdAt = ctime(&now);
+	createdAt.erase(createdAt.end() - 1);
 	if(id != 0)
 	{
 		Task.append(",");
@@ -10,7 +13,11 @@ std::string writeTask(int id, std::string desc, std::string status)
 	std::stringstream ss;
 	ss << id;
 
-	Task += "\n\t{\n\t\t\"taskId\":" + ss.str() + ",\n\t\t\"description\":\"" + desc + "\",\n\t\t\"status\":\"" + status + "\"\n\t}\n";
+	Task += "\n\t{\n\t\t\"taskId\":" + ss.str() \
+		+ ",\n\t\t\"description\":\"" + desc \
+		+ "\",\n\t\t\"status\":\"" + status \
+		+ "\",\n\t\t\"createdAt\":\"" + createdAt \
+		+ "\",\n\t\t\"updatedAt\":\"" + createdAt + "\"\n\t}\n";
 	return Task;
 }
 
